@@ -158,8 +158,10 @@ function AppContent() {
     return () => unsubscribeOrders();
   }, [user]);
 
-  // Scroll to top on page change
+  // Dynamic Page Title & Scroll to top on page change
   React.useEffect(() => {
+    const pageTitle = currentPage.charAt(0).toUpperCase() + currentPage.slice(1);
+    document.title = `Cosmetics | ${pageTitle === 'Home' ? 'Premium Beauty' : pageTitle}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
