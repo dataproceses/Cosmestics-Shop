@@ -33,10 +33,18 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
     if (this.state.hasError) {
       let errorMessage = "Something went wrong.";
       try {
-        const parsed = JSON.parse(this.state.error.message);
-        if (parsed.error) errorMessage = `Permission Error: ${parsed.error}`;
+        if (this.state.error?.message) {
+          try {
+            const parsed = JSON.parse(this.state.error.message);
+            if (parsed.error) errorMessage = `Permission Error: ${parsed.error}`;
+            else if (parsed.message) errorMessage = parsed.message;
+          } catch (e) {
+            // Not JSON, use raw message
+            errorMessage = this.state.error.message;
+          }
+        }
       } catch (e) {
-        errorMessage = this.state.error.message || errorMessage;
+        console.error("Error in ErrorBoundary render:", e);
       }
 
       return (

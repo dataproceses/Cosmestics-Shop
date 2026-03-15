@@ -5,7 +5,24 @@ import { GoogleGenAI } from '@google/genai';
 import Markdown from 'react-markdown';
 import { Product } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+// Initialize AI client lazily to prevent crash if key is missing
+let aiClientInstance: GoogleGenAI | null = null;
+const getAI = () => {
+  if (!aiClientInstance) {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey || apiKey === 'undefined') {
+      console.warn("GEMINI_API_KEY is missing. AI Assistant will be disabled.");
+      return null;
+    }
+    try {
+      aiClientInstance = new GoogleGenAI({ apiKey });
+    } catch (e) {
+      console.error("Failed to initialize GoogleGenAI:", e);
+      return null;
+    }
+  }
+  return aiClientInstance;
+};
 
 interface AIAssistantProps {
   products: Product[];
@@ -24,18 +41,23 @@ export default function AIAssistant({ products }: AIAssistantProps) {
   const chatRef = useRef<any>(null);
 
   useEffect(() => {
-    if (chatRef.current || products.length === 0) return;
+    const aiClient = getAI();
+    if (chatRef.current || !aiClient || products.length === 0) return;
 
     const systemInstruction = `You are a helpful AI assistant for Cosmostics, a premium beauty and skincare store.
     Here is the current product catalog: ${JSON.stringify(products.map(p => ({ name: p.name, description: p.description, price: p.price, category: p.category, stock: p.stock, variants: p.variants })))}.
     Answer customer questions about products, recommend items, and be polite and concise. Do not make up products that are not in the catalog.`;
 
-    chatRef.current = ai.chats.create({
-      model: "gemini-3-flash-preview",
-      config: {
-        systemInstruction,
-      }
-    });
+    try {
+      chatRef.current = aiClient.chats.create({
+        model: "gemini-3-flash-preview",
+        config: {
+          systemInstruction,
+        }
+      });
+    } catch (error) {
+      console.error("Failed to create AI chat session:", error);
+    }
   }, [products]);
 
   const scrollToBottom = () => {
@@ -56,6 +78,12 @@ export default function AIAssistant({ products }: AIAssistantProps) {
     setIsLoading(true);
 
     try {
+      const aiClient = getAI();
+      if (!aiClient || !chatRef.current) {
+        setMessages(prev => [...prev, { role: 'model', text: 'Sorry, the AI Assistant is currently unavailable. Please ensure the GEMINI_API_KEY is configured in your environment.' }]);
+        setIsLoading(false);
+        return;
+      }
       const response = await chatRef.current.sendMessage({ message: userMessage });
       setMessages(prev => [...prev, { role: 'model', text: response.text }]);
     } catch (error) {
