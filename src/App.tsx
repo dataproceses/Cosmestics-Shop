@@ -413,8 +413,39 @@ function AppContent() {
               </ul>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-stone-400">© 2026 Cosmostics. All rights reserved.</p>
+          <div className="mt-12 pt-8 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <p className="text-xs text-stone-400">© 2026 Cosmostics. All rights reserved.</p>
+              <div className="flex items-center space-x-3 opacity-30 grayscale hover:grayscale-0 transition-all">
+                {/* Google Pay Icon */}
+                <div className="w-10 h-6 bg-white border border-stone-200 rounded flex items-center justify-center p-1">
+                  <svg viewBox="0 0 40 16" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#4285F4" d="M15.5 8.1c0-.4 0-.8-.1-1.1H11v2.1h2.5c-.1.6-.5 1.1-.9 1.4v1.2h1.5c.9-.8 1.4-2 1.4-3.6z"/>
+                    <path fill="#34A853" d="M11 12.5c1.2 0 2.2-.4 3-1.1l-1.5-1.2c-.4.3-.9.4-1.5.4-1.1 0-2.1-.8-2.4-1.8H7.1v1.2c.7 1.5 2.2 2.5 3.9 2.5z"/>
+                    <path fill="#FBBC05" d="M8.6 8.8c-.1-.3-.1-.6-.1-.9s0-.6.1-.9V5.8H7.1c-.4.8-.6 1.7-.6 2.7s.2 1.9.6 2.7l1.5-1.2z"/>
+                    <path fill="#EA4335" d="M11 5.1c.7 0 1.3.2 1.8.7l1.3-1.3c-.8-.8-1.9-1.2-3.1-1.2-1.7 0-3.2 1-3.9 2.5l1.5 1.2c.3-1 1.3-1.9 2.4-1.9z"/>
+                    <text x="18" y="12" fill="#5F6368" style={{fontSize: '10px', fontWeight: 'bold'}}>Pay</text>
+                  </svg>
+                </div>
+                {/* Apple Pay Icon */}
+                <div className="w-10 h-6 bg-white border border-stone-200 rounded flex items-center justify-center p-1">
+                  <svg viewBox="0 0 40 16" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.5 8.5c0-1.2.6-2.2 1.5-2.8-.6-.8-1.5-1.3-2.5-1.3-1.1 0-2.1.8-2.7.8-.6 0-1.4-.7-2.3-.7-1.2 0-2.3.7-2.9 1.7-1.2 2.1-.3 5.2.9 6.9.6.8 1.3 1.7 2.2 1.7.9 0 1.2-.5 2.3-.5 1.1 0 1.4.5 2.3.5.9 0 1.5-.8 2.1-1.6.7-1 .9-2 .9-2.1 0 0-1.8-.7-1.8-2.6zM10.8 4.1c.5-.6.8-1.4.7-2.2-.7 0-1.6.5-2.1 1.1-.5.5-.9 1.3-.8 2.1.8.1 1.7-.4 2.2-1z" fill="black"/>
+                    <text x="18" y="12" fill="black" style={{fontSize: '10px', fontWeight: 'bold'}}>Pay</text>
+                  </svg>
+                </div>
+                {/* Generic Card Icon */}
+                <div className="w-10 h-6 bg-white border border-stone-200 rounded flex items-center justify-center p-1">
+                  <div className="w-full h-full bg-stone-100 rounded-sm relative overflow-hidden">
+                    <div className="absolute top-1 left-1 w-2 h-1.5 bg-amber-400 rounded-xs" />
+                    <div className="absolute bottom-1 right-1 flex space-x-0.5">
+                      <div className="w-2 h-2 rounded-full bg-red-500 opacity-80" />
+                      <div className="w-2 h-2 rounded-full bg-amber-500 opacity-80 -ml-1" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="flex space-x-6 text-stone-400">
               <button className="text-xs hover:text-stone-900 transition-colors cursor-pointer">Instagram</button>
               <button className="text-xs hover:text-stone-900 transition-colors cursor-pointer">Pinterest</button>

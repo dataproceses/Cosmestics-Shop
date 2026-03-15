@@ -79,6 +79,55 @@ export default function StoreFront({ user, products, categories, onAddToCart, on
         </section>
       )}
 
+      {/* Brand Logos Section */}
+      {!isShopPage && (
+        <section className="py-12 border-b border-stone-100 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-black rounded flex items-center justify-center text-white font-bold text-xs">iS</div>
+                <span className="font-bold text-stone-900 tracking-tighter">InStyle</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current text-stone-900" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                <span className="font-bold text-stone-900 tracking-tighter uppercase">Vogue</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-stone-900 rounded-full flex items-center justify-center text-white">
+                  <span className="text-[10px] font-black">A</span>
+                </div>
+                <span className="font-bold text-stone-900 tracking-tighter uppercase">Allure</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 border-2 border-stone-900 flex items-center justify-center">
+                  <span className="text-[10px] font-bold">E</span>
+                </div>
+                <span className="font-bold text-stone-900 tracking-tighter uppercase">Elle</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-stone-200 rounded flex items-center justify-center">
+                  <div className="w-4 h-4 bg-stone-400 rounded-sm" />
+                </div>
+                <span className="font-bold text-stone-900 tracking-tighter uppercase text-[10px]">Bazaar</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 flex items-center justify-center">
+                  <div className="grid grid-cols-2 gap-0.5">
+                    <div className="w-2 h-2 bg-stone-900" />
+                    <div className="w-2 h-2 bg-stone-400" />
+                    <div className="w-2 h-2 bg-stone-400" />
+                    <div className="w-2 h-2 bg-stone-900" />
+                  </div>
+                </div>
+                <span className="font-bold text-stone-900 tracking-tighter uppercase text-[10px]">Glamour</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Categories and Search */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-6">
