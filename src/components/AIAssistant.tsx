@@ -31,7 +31,7 @@ interface AIAssistantProps {
 export default function AIAssistant({ products }: AIAssistantProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{ role: 'user' | 'model', text: string }[]>([
-    { role: 'model', text: 'Hi! I am the Cosmostics AI Assistant. How can I help you find the perfect product today?' }
+    { role: 'model', text: 'Hi! I am the Cosmetics AI Assistant. How can I help you find the perfect product today?' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +44,7 @@ export default function AIAssistant({ products }: AIAssistantProps) {
     const aiClient = getAI();
     if (chatRef.current || !aiClient || products.length === 0) return;
 
-    const systemInstruction = `You are a helpful AI assistant for Cosmostics, a premium beauty and skincare store.
+    const systemInstruction = `You are a helpful AI assistant for Cosmetics, a premium beauty and skincare store.
     Here is the current product catalog: ${JSON.stringify(products.map(p => ({ name: p.name, description: p.description, price: p.price, category: p.category, stock: p.stock, variants: p.variants })))}.
     Answer customer questions about products, recommend items, and be polite and concise. Do not make up products that are not in the catalog.`;
 
@@ -117,7 +117,7 @@ export default function AIAssistant({ products }: AIAssistantProps) {
             <div className="p-4 bg-stone-900 text-white flex justify-between items-center">
               <div className="flex items-center space-x-2">
                 <Bot size={20} />
-                <span className="font-semibold">Cosmostics AI</span>
+                <span className="font-semibold">Cosmetics AI</span>
               </div>
               <button onClick={() => setIsOpen(false)} className="text-stone-300 hover:text-white transition-colors">
                 <X size={20} />

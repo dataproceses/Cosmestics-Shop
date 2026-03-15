@@ -272,7 +272,7 @@ function AppContent() {
             <div className="absolute inset-0 w-20 h-20 border-t-2 border-stone-900 rounded-full animate-spin" />
           </div>
           <div className="text-center">
-            <h1 className="serif text-3xl md:text-4xl font-bold text-stone-900 tracking-tighter mb-2">COSMOSTICS</h1>
+            <h1 className="serif text-3xl md:text-4xl font-bold text-stone-900 tracking-tighter mb-2">COSMETICS</h1>
             <p className="text-stone-400 text-xs uppercase tracking-[0.3em] font-medium animate-pulse">Loading Excellence</p>
           </div>
         </div>
@@ -396,7 +396,7 @@ function AppContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="col-span-1 md:col-span-2">
-              <span className="serif text-2xl font-bold tracking-tighter text-stone-900">COSMOSTICS</span>
+              <span className="serif text-2xl font-bold tracking-tighter text-stone-900">COSMETICS</span>
               <p className="mt-4 text-stone-500 max-w-sm">
                 Premium beauty and skincare products for the modern individual. 
                 Ethically sourced, clinically proven, and beautifully packaged.
@@ -423,7 +423,7 @@ function AppContent() {
           </div>
           <div className="mt-12 pt-8 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start gap-4">
-              <p className="text-xs text-stone-400">© 2026 Cosmostics. All rights reserved.</p>
+              <p className="text-xs text-stone-400">© 2026 Cosmetics. All rights reserved.</p>
               <div className="flex items-center space-x-3 opacity-30 grayscale hover:grayscale-0 transition-all">
                 {/* Google Pay Icon */}
                 <div className="w-10 h-6 bg-white border border-stone-200 rounded flex items-center justify-center p-1">
@@ -480,7 +480,7 @@ function AboutPage() {
     <div className="max-w-4xl mx-auto px-4 py-20">
       <h1 className="serif text-4xl font-bold text-stone-900 mb-8">About Us</h1>
       <div className="prose prose-stone max-w-none">
-        <p className="text-lg text-stone-600 mb-6">Welcome to Cosmostics, where beauty meets science and nature. Founded in 2026, we believe that everyone deserves to feel confident in their own skin.</p>
+        <p className="text-lg text-stone-600 mb-6">Welcome to Cosmetics, where beauty meets science and nature. Founded in 2026, we believe that everyone deserves to feel confident in their own skin.</p>
         <p className="text-lg text-stone-600">Our mission is to provide premium, ethically sourced, and clinically proven skincare and cosmetics that enhance your natural beauty without compromising on health or the environment.</p>
       </div>
     </div>
@@ -492,7 +492,7 @@ function SustainabilityPage() {
     <div className="max-w-4xl mx-auto px-4 py-20">
       <h1 className="serif text-4xl font-bold text-stone-900 mb-8">Sustainability</h1>
       <div className="prose prose-stone max-w-none">
-        <p className="text-lg text-stone-600 mb-6">At Cosmostics, sustainability is at the core of everything we do. We are committed to reducing our environmental footprint and promoting ethical practices across our supply chain.</p>
+        <p className="text-lg text-stone-600 mb-6">At Cosmetics, sustainability is at the core of everything we do. We are committed to reducing our environmental footprint and promoting ethical practices across our supply chain.</p>
         <ul className="space-y-4 text-stone-600 list-disc pl-5">
           <li><strong className="text-stone-900">Eco-Friendly Packaging:</strong> All our packaging is 100% recyclable or biodegradable.</li>
           <li><strong className="text-stone-900">Cruelty-Free:</strong> We never test on animals, and we only work with suppliers who share this commitment.</li>
@@ -510,8 +510,8 @@ function ContactPage() {
       <div className="prose prose-stone max-w-none">
         <p className="text-lg text-stone-600 mb-8">We'd love to hear from you! Whether you have a question about our products, need help with an order, or just want to say hello, our team is here to assist.</p>
         <div className="bg-stone-50 p-8 rounded-2xl border border-stone-100 space-y-4">
-          <p className="text-stone-600"><strong className="text-stone-900">Email:</strong> support@cosmostics.com</p>
-          <p className="text-stone-600"><strong className="text-stone-900">Phone:</strong> 1-800-COSMOSTICS</p>
+          <p className="text-stone-600"><strong className="text-stone-900">Email:</strong> support@cosmetics.com</p>
+          <p className="text-stone-600"><strong className="text-stone-900">Phone:</strong> 1-800-COSMETICS</p>
           <p className="text-stone-600"><strong className="text-stone-900">Address:</strong> 123 Beauty Lane, Glow City, CA 90210</p>
         </div>
       </div>

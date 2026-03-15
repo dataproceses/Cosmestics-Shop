@@ -54,7 +54,7 @@ export default function Navbar({ user, cartCount, onNavigate, currentPage }: Nav
             className="flex-shrink-0 flex items-center cursor-pointer mr-4" 
             onClick={() => onNavigate('home')}
           >
-            <span className="serif text-xl sm:text-2xl font-bold tracking-tighter text-stone-900">COSMOSTICS</span>
+            <span className="serif text-xl sm:text-2xl font-bold tracking-tighter text-stone-900">COSMETICS</span>
           </div>
 
           {/* Desktop Nav */}
@@ -196,7 +196,7 @@ export default function Navbar({ user, cartCount, onNavigate, currentPage }: Nav
               className="absolute right-0 top-0 bottom-0 w-[280px] bg-white shadow-2xl p-6 flex flex-col"
             >
               <div className="flex justify-between items-center mb-8">
-                <span className="serif text-xl font-bold tracking-tighter text-stone-900">COSMOSTICS</span>
+                <span className="serif text-xl font-bold tracking-tighter text-stone-900">COSMETICS</span>
                 <button onClick={() => setIsMenuOpen(false)} className="text-stone-500">
                   <X size={24} />
                 </button>

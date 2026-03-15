@@ -112,7 +112,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
             />
             <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent" />
             <div className="absolute bottom-12 left-12 right-12 text-white">
-              <span className="serif text-xl font-bold tracking-tighter mb-4 block">COSMOSTICS</span>
+              <span className="serif text-xl font-bold tracking-tighter mb-4 block">COSMETICS</span>
               <h3 className="serif text-3xl font-bold mb-4 leading-tight">Elevate Your Beauty Ritual</h3>
               <p className="text-stone-300 text-sm leading-relaxed">
                 Join our community of beauty enthusiasts and discover a world of premium skincare and cosmetics curated just for you.

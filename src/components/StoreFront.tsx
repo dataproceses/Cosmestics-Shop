@@ -79,49 +79,109 @@ export default function StoreFront({ user, products, categories, onAddToCart, on
         </section>
       )}
 
-      {/* Brand Logos Section */}
+      {/* Brand Logos Section (Dock Style) */}
       {!isShopPage && (
-        <section className="py-12 border-b border-stone-100 bg-white">
+        <section className="py-16 bg-stone-50 border-y border-stone-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-              <div className="flex items-center space-x-2">
+            <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 bg-stone-900/5 backdrop-blur-sm py-6 px-8 rounded-2xl border border-stone-200/50">
+              {/* Unsplash-like Logo */}
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-stone-900 flex items-center justify-center rounded-sm">
+                  <div className="w-4 h-4 border-2 border-white border-t-0" />
+                  <div className="absolute w-2 h-2 bg-white top-[30%]" />
+                </div>
+              </div>
+              
+              <div className="w-px h-8 bg-stone-300 mx-2 hidden sm:block" />
+
+              {/* iS Logo */}
+              <div className="flex items-center">
                 <div className="w-8 h-8 bg-black rounded flex items-center justify-center text-white font-bold text-xs">iS</div>
-                <span className="font-bold text-stone-900 tracking-tighter">InStyle</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current text-stone-900" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                </svg>
-                <span className="font-bold text-stone-900 tracking-tighter uppercase">Vogue</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-stone-900 rounded-full flex items-center justify-center text-white">
-                  <span className="text-[10px] font-black">A</span>
+
+              <div className="w-px h-8 bg-stone-300 mx-2 hidden sm:block" />
+
+              {/* Whale/Dolphin Logo (Lucide doesn't have a perfect one, using a stylized wave/fish) */}
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12,2C6.47,2,2,6.47,2,12c0,4.42,2.87,8.17,6.84,9.39c0.19,0.04,0.26-0.08,0.26-0.18c0-0.09-0.01-0.32-0.01-0.63 c-2.78,0.6-3.37-1.34-3.37-1.34c-0.45-1.15-1.11-1.46-1.11-1.46c-0.91-0.62,0.07-0.61,0.07-0.61c1.01,0.07,1.54,1.03,1.54,1.03 c0.89,1.53,2.34,1.09,2.91,0.83c0.09-0.65,0.35-1.09,0.63-1.34c-2.22-0.25-4.55-1.11-4.55-4.94c0-1.09,0.39-1.98,1.03-2.68 C6.15,9.02,5.81,8,6.35,6.65c0,0,0.84-0.27,2.75,1.02C9.9,7.4,10.96,7.27,12,7.27c1.04,0,2.1,0.13,2.9,0.4c1.91-1.29,2.75-1.02,2.75-1.02 c0.55,1.35,0.21,2.37,0.1,2.62c0.64,0.7,1.03,1.59,1.03,2.68c0,3.84-2.34,4.68-4.57,4.93c0.36,0.31,0.68,0.92,0.68,1.85 c0,1.34-0.01,2.42-0.01,2.75c0,0.11,0.07,0.23,0.26,0.19C19.14,20.16,22,16.42,22,12C22,6.47,17.53,2,12,2z" />
+                  </svg>
                 </div>
-                <span className="font-bold text-stone-900 tracking-tighter uppercase">Allure</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 border-2 border-stone-900 flex items-center justify-center">
-                  <span className="text-[10px] font-bold">E</span>
+
+              <div className="w-px h-8 bg-stone-300 mx-2 hidden sm:block" />
+
+              {/* Google G Logo */}
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-white rounded-full shadow-sm flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c3.11 0 5.72-1.03 7.63-2.81l-3.57-2.77c-1.06.71-2.42 1.13-4.06 1.13-3.12 0-5.76-2.11-6.71-4.94H1.71v2.86C3.6 20.17 7.51 23 12 23z" fill="#34A853"/>
+                    <path d="M5.29 13.61c-.24-.71-.38-1.47-.38-2.26s.14-1.55.38-2.26V6.23H1.71C.62 8.41 0 10.86 0 13.4s.62 4.99 1.71 7.17l3.58-2.86c-.24-.71-.38-1.47-.38-2.26z" fill="#FBBC05"/>
+                    <path d="M12 4.64c1.69 0 3.21.58 4.41 1.72l3.31-3.31C17.71 1.05 15.11 0 12 0 7.51 0 3.6 2.83 1.71 6.23L5.29 9.09c.95-2.83 3.59-4.45 6.71-4.45z" fill="#EA4335"/>
+                  </svg>
                 </div>
-                <span className="font-bold text-stone-900 tracking-tighter uppercase">Elle</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-stone-200 rounded flex items-center justify-center">
-                  <div className="w-4 h-4 bg-stone-400 rounded-sm" />
-                </div>
-                <span className="font-bold text-stone-900 tracking-tighter uppercase text-[10px]">Bazaar</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <div className="grid grid-cols-2 gap-0.5">
-                    <div className="w-2 h-2 bg-stone-900" />
-                    <div className="w-2 h-2 bg-stone-400" />
-                    <div className="w-2 h-2 bg-stone-400" />
-                    <div className="w-2 h-2 bg-stone-900" />
+
+              <div className="w-px h-8 bg-stone-300 mx-2 hidden sm:block" />
+
+              {/* Wave Logo 1 */}
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-stone-200 rounded-full flex items-center justify-center">
+                  <div className="w-5 h-5 border-2 border-stone-500 rounded-full flex items-center justify-center">
+                    <div className="w-2 h-2 bg-stone-500 rounded-full" />
                   </div>
                 </div>
-                <span className="font-bold text-stone-900 tracking-tighter uppercase text-[10px]">Glamour</span>
+              </div>
+
+              <div className="w-px h-8 bg-stone-300 mx-2 hidden sm:block" />
+
+              {/* Wave Logo 2 */}
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-white border border-stone-200 rounded-full flex items-center justify-center">
+                  <div className="w-5 h-5 border-2 border-stone-900 rounded-full flex items-center justify-center">
+                    <div className="w-2 h-2 bg-stone-900 rounded-full" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="w-px h-8 bg-stone-300 mx-2 hidden sm:block" />
+
+              {/* Blue Document Icons */}
+              <div className="flex items-center space-x-2">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="w-8 h-8 bg-blue-500 rounded-md flex flex-col items-center justify-center p-1.5 space-y-0.5">
+                    <div className="w-full h-0.5 bg-white/80 rounded-full" />
+                    <div className="w-full h-0.5 bg-white/80 rounded-full" />
+                    <div className="w-full h-0.5 bg-white/80 rounded-full" />
+                  </div>
+                ))}
+              </div>
+
+              <div className="w-px h-8 bg-stone-300 mx-2 hidden sm:block" />
+
+              {/* Settings Gear */}
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-stone-200 rounded-full flex items-center justify-center text-stone-600">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.84,9.48l2.03,1.58C4.82,11.36,4.8,11.68,4.8,12c0,0.33,0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.5c-1.93,0-3.5-1.57-3.5-3.5 s1.57-3.5,3.5-3.5s3.5,1.57,3.5,3.5S13.93,15.5,12,15.5z" />
+                  </svg>
+                </div>
+              </div>
+
+              <div className="w-px h-8 bg-stone-300 mx-2 hidden sm:block" />
+
+              {/* Another Google G Logo */}
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-white rounded-full shadow-sm flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" className="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c3.11 0 5.72-1.03 7.63-2.81l-3.57-2.77c-1.06.71-2.42 1.13-4.06 1.13-3.12 0-5.76-2.11-6.71-4.94H1.71v2.86C3.6 20.17 7.51 23 12 23z" fill="#34A853"/>
+                    <path d="M5.29 13.61c-.24-.71-.38-1.47-.38-2.26s.14-1.55.38-2.26V6.23H1.71C.62 8.41 0 10.86 0 13.4s.62 4.99 1.71 7.17l3.58-2.86c-.24-.71-.38-1.47-.38-2.26z" fill="#FBBC05"/>
+                    <path d="M12 4.64c1.69 0 3.21.58 4.41 1.72l3.31-3.31C17.71 1.05 15.11 0 12 0 7.51 0 3.6 2.83 1.71 6.23L5.29 9.09c.95-2.83 3.59-4.45 6.71-4.45z" fill="#EA4335"/>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>

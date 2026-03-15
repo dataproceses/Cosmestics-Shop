@@ -320,7 +320,7 @@ export default function Cart({ items, onUpdateQuantity, onRemove, onCheckout, on
             )}
             
             <p className="text-center text-xs text-stone-400 mt-6">
-              Secure checkout powered by Cosmostics. <br />
+              Secure checkout powered by Cosmetics. <br />
               Free returns within 30 days.
             </p>
           </div>
