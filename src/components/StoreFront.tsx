@@ -280,6 +280,8 @@ export default function StoreFront({ user, products, categories, onAddToCart, on
         onClose={() => setSelectedProduct(null)}
         onAddToCart={onAddToCart}
         user={user}
+        allProducts={products}
+        onSelectProduct={setSelectedProduct}
       />
     </div>
   );

@@ -11,9 +11,11 @@ interface ProductModalProps {
   onClose: () => void;
   onAddToCart: (product: Product, variant?: ProductVariant) => void;
   user: UserProfile | null;
+  allProducts: Product[];
+  onSelectProduct: (product: Product) => void;
 }
 
-export default function ProductModal({ product, isOpen, onClose, onAddToCart, user }: ProductModalProps) {
+export default function ProductModal({ product, isOpen, onClose, onAddToCart, user, allProducts, onSelectProduct }: ProductModalProps) {
   const [reviews, setReviews] = React.useState<Review[]>([]);
   const [newRating, setNewRating] = React.useState(5);
   const [newComment, setNewComment] = React.useState('');
@@ -70,6 +72,13 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, us
     }
   };
 
+  const similarProducts = React.useMemo(() => {
+    if (!product) return [];
+    return allProducts
+      .filter(p => p.category === product.category && p.id !== product.id)
+      .slice(0, 4);
+  }, [product, allProducts]);
+
   if (!product) return null;
 
   const getFallbackImage = (id: string) => `https://picsum.photos/seed/${id}/800/1000`;
@@ -115,7 +124,7 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, us
             </div>
 
             {/* Product Details & Reviews */}
-            <div className="w-full md:w-1/2 flex flex-col flex-1 min-h-0 overflow-y-auto">
+            <div className="w-full md:w-1/2 flex flex-col flex-1 min-h-0 overflow-y-auto modal-scroll-area">
               <div className="p-6 md:p-8 border-b border-stone-100 shrink-0">
                 <span className="text-xs font-bold text-stone-400 uppercase tracking-wider">{product.category}</span>
                 <h2 className="serif text-2xl md:text-3xl font-bold text-stone-900 mt-1 mb-2">{product.name}</h2>
@@ -234,6 +243,38 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, us
                     ))
                   )}
                 </div>
+
+                {/* Similar Products Section */}
+                {similarProducts.length > 0 && (
+                  <div className="mt-12 pt-8 border-t border-stone-100">
+                    <h3 className="serif text-xl font-bold text-stone-900 mb-6">You May Also Like</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      {similarProducts.map((similar) => (
+                        <div 
+                          key={similar.id} 
+                          className="group cursor-pointer"
+                          onClick={() => {
+                            onSelectProduct(similar);
+                            // Scroll to top of modal content
+                            const modalContent = document.querySelector('.modal-scroll-area');
+                            if (modalContent) modalContent.scrollTo({ top: 0, behavior: 'smooth' });
+                          }}
+                        >
+                          <div className="aspect-[4/5] rounded-xl overflow-hidden bg-stone-100 mb-2">
+                            <img 
+                              src={similar.imageUrl || getFallbackImage(similar.id)} 
+                              alt={similar.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <h4 className="text-sm font-medium text-stone-900 group-hover:underline truncate">{similar.name}</h4>
+                          <p className="text-xs text-stone-500">${similar.price.toFixed(2)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
