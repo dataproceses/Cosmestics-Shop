@@ -220,53 +220,133 @@ export default function AdminDashboard() {
     }));
   };
 
+  const [isCleaning, setIsCleaning] = React.useState(false);
+
   const seedSampleData = async () => {
     const sampleProducts = [
       {
         name: "Radiance Serum",
-        description: "A powerful vitamin C serum that brightens and evens skin tone.",
-        price: 48.00,
+        description: "A transformative elixir infused with pure Vitamin C and rare botanical extracts. Designed to illuminate dull complexions and restore youthful elasticity through deep molecular hydration.",
+        price: 62.00,
         category: "Skincare",
         imageUrl: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800",
         stock: 15,
+        variants: [
+          { id: crypto.randomUUID(), type: 'Size', value: '30ml', price: 62.00, stock: 10 },
+          { id: crypto.randomUUID(), type: 'Size', value: '50ml', price: 85.00, stock: 5 }
+        ],
         createdAt: new Date().toISOString()
       },
       {
         name: "Velvet Matte Lipstick",
-        description: "Long-lasting, creamy matte lipstick in a classic rose shade.",
-        price: 24.00,
+        description: "A high-pigment, weightless formula that delivers a sophisticated matte finish. Enriched with organic shea butter and jojoba oil for 12-hour comfort and intense color payoff.",
+        price: 32.00,
         category: "Makeup",
         imageUrl: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&q=80&w=800",
         stock: 20,
+        variants: [
+          { id: crypto.randomUUID(), type: 'Shade', value: 'Classic Rose', price: 32.00, stock: 10 },
+          { id: crypto.randomUUID(), type: 'Shade', value: 'Deep Crimson', price: 32.00, stock: 10 }
+        ],
         createdAt: new Date().toISOString()
       },
       {
         name: "Midnight Bloom Perfume",
-        description: "An enchanting blend of jasmine, vanilla, and dark amber.",
-        price: 85.00,
+        description: "An evocative olfactory journey through a moonlit garden. Notes of rare night-blooming jasmine, smoky Tahitian vanilla, and warm, hand-harvested amber create a lingering, mysterious trail.",
+        price: 110.00,
         category: "Fragrance",
         imageUrl: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=800",
         stock: 8,
+        variants: [
+          { id: crypto.randomUUID(), type: 'Size', value: '50ml', price: 110.00, stock: 5 },
+          { id: crypto.randomUUID(), type: 'Size', value: '100ml', price: 185.00, stock: 3 }
+        ],
         createdAt: new Date().toISOString()
       },
       {
         name: "Silk Glow Foundation",
-        description: "Lightweight foundation for a natural, dewy finish.",
-        price: 36.00,
+        description: "A breathable, skin-perfecting foundation that blurs imperfections while nourishing the skin. Features light-diffusing technology for a luminous, second-skin radiance that lasts all day.",
+        price: 54.00,
         category: "Makeup",
         imageUrl: "https://images.unsplash.com/photo-1599733589046-10c005739ef0?auto=format&fit=crop&q=80&w=800",
         stock: 12,
+        variants: [
+          { id: crypto.randomUUID(), type: 'Shade', value: 'Light Ivory', price: 54.00, stock: 4 },
+          { id: crypto.randomUUID(), type: 'Shade', value: 'Natural Beige', price: 54.00, stock: 4 },
+          { id: crypto.randomUUID(), type: 'Shade', value: 'Warm Sand', price: 54.00, stock: 4 }
+        ],
         createdAt: new Date().toISOString()
       }
     ];
 
     try {
+      let addedCount = 0;
       for (const p of sampleProducts) {
-        await addDoc(collection(db, 'products'), p);
+        // Check if product with same name already exists
+        const exists = products.some(existing => existing.name.toLowerCase().trim() === p.name.toLowerCase().trim());
+        if (!exists) {
+          await addDoc(collection(db, 'products'), p);
+          addedCount++;
+        }
       }
-      alert("Sample data seeded successfully!");
+      if (addedCount > 0) {
+        alert(`Successfully added ${addedCount} new products!`);
+      } else {
+        alert("All sample products already exist in your store.");
+      }
     } catch (error) {
       handleFirestoreError(error, OperationType.CREATE, 'products');
+    }
+  };
+
+  const removeDuplicates = async () => {
+    if (products.length === 0) {
+      alert("No products to scan.");
+      return;
+    }
+    
+    setIsCleaning(true);
+    // Use a map to track unique names
+    const nameMap = new Map<string, string[]>();
+    console.log(`[Cleanup] Scanning ${products.length} products for duplicates...`);
+    
+    products.forEach(p => {
+      // Normalize name: trim whitespace and collapse multiple spaces
+      const normalizedName = p.name.trim().toLowerCase().replace(/\s+/g, ' ');
+      if (!nameMap.has(normalizedName)) {
+        nameMap.set(normalizedName, []);
+      }
+      nameMap.get(normalizedName)?.push(p.id);
+    });
+
+    let deletedCount = 0;
+    try {
+      const promises = [];
+      for (const [name, ids] of nameMap.entries()) {
+        if (ids.length > 1) {
+          console.log(`[Cleanup] Found ${ids.length} copies of "${name}". Keeping first, deleting ${ids.length - 1}.`);
+          // Keep the first one (usually the oldest if sorted by createdAt), delete the rest
+          const toDelete = ids.slice(1);
+          for (const id of toDelete) {
+            promises.push(deleteDoc(doc(db, 'products', id)));
+            deletedCount++;
+          }
+        }
+      }
+      
+      if (promises.length > 0) {
+        await Promise.all(promises);
+        console.log(`[Cleanup] Successfully deleted ${deletedCount} duplicates.`);
+        alert(`Successfully removed ${deletedCount} duplicate products.`);
+      } else {
+        console.log("[Cleanup] No duplicates found by name.");
+        alert("No duplicates found. All products have unique names.");
+      }
+    } catch (error) {
+      console.error("[Cleanup] Error removing duplicates:", error);
+      handleFirestoreError(error, OperationType.DELETE, 'products/cleanup');
+    } finally {
+      setIsCleaning(false);
     }
   };
 
@@ -323,6 +403,15 @@ export default function AdminDashboard() {
                 />
               </div>
               <div className="flex items-center space-x-3">
+                <button 
+                  onClick={removeDuplicates}
+                  disabled={isCleaning}
+                  className="flex items-center justify-center space-x-2 bg-red-50 text-red-600 px-4 py-2 rounded-lg hover:bg-red-100 transition-colors disabled:opacity-50"
+                  title="Remove duplicate products with the same name"
+                >
+                  {isCleaning ? <Loader2 size={18} className="animate-spin" /> : <Trash2 size={18} />}
+                  <span className="hidden sm:inline">{isCleaning ? 'Cleaning...' : 'Clean Duplicates'}</span>
+                </button>
                 <button 
                   onClick={seedSampleData}
                   className="flex items-center justify-center space-x-2 bg-stone-100 text-stone-600 px-4 py-2 rounded-lg hover:bg-stone-200 transition-colors"

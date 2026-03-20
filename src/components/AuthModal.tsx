@@ -48,9 +48,11 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
       onClose();
       onSuccess?.();
     } catch (err: any) {
-      if (err.code !== 'auth/popup-closed-by-user') {
-        setError(err.message);
+      let message = err.message;
+      if (err.code === 'auth/invalid-credential') {
+        message = "Invalid email or password. If you haven't created an account yet, please switch to 'Sign Up'. If you are using Google, try the 'Continue with Google' button.";
       }
+      setError(`${message} [${err.code}]`);
     } finally {
       setLoading(false);
     }
@@ -78,7 +80,11 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
         setMessage('Password reset email sent! Please check your inbox.');
       }
     } catch (err: any) {
-      setError(err.message);
+      let message = err.message;
+      if (err.code === 'auth/invalid-credential') {
+        message = "Invalid email or password. If you haven't created an account yet, please switch to 'Sign Up'. If you are using Google, try the 'Continue with Google' button.";
+      }
+      setError(`${message} [${err.code}]`);
     } finally {
       setLoading(false);
     }
